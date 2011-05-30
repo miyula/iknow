@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content">
+    	<Button android:id="@+id/button_new_account"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:layout_alignParentRight="true"
+    		android:layout_marginRight="10dip"
+    		android:text="+ Register new account" />
+    </RelativeLayout>
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:stretchColumns="1">
+    	<TableRow>
+    		<TextView 
+    			android:text="Username"
+    			android:textStyle="bold"
+    			android:gravity="right"
+    			android:padding="5dip"/>
+    		<EditText
+    			android:id="@+id/edittext_username"
+    			android:padding="5dip"/>
+    	</TableRow>
+    	<TableRow>
+    		<TextView 
+    			android:text="Password"
+    			android:textStyle="bold"
+    			android:gravity="right"
+    			android:padding="5dip"/>
+    		<EditText
+    			android:id="@+id/edittext_password"
+    			android:password="true"
+    			android:padding="5dip"/>
+    	</TableRow>
+    </TableLayout>
+    <Button android:id="@+id/button_save_account"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:layout_marginRight="80dip"
+    	android:layout_marginLeft="80dip"
+    	android:text="Save account" />
+    <TextView android:id="@+id/textview_save_account_status"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:layout_gravity="center" />
+    	
+</LinearLayout>

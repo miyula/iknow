@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:layout_margin="5dip">
+  <TextView 
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:textSize="30dip"
+    	android:textStyle="bold"
+    	android:textColor="#ffffff"
+    	android:layout_marginTop="20dip"
+    	android:layout_marginBottom="20dip"
+    	android:layout_marginLeft="50dip"
+    	android:layout_marginRight="50dip"
+    	android:text="New post"/>
+  <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  	android:layout_width="fill_parent"
+  	android:layout_height="wrap_content"
+  	android:stretchColumns="1">
+  	<TableRow>
+  		<TextView 
+    		android:text="Title"
+    		android:textStyle="bold"
+    		android:gravity="right"
+    		android:padding="5dip"/>
+    	<EditText
+    		android:id="@+id/edittext_post_title"
+    		android:padding="5dip"/>
+  	</TableRow>
+   	<TableRow>
+  		<TextView 
+    		android:text="Location"
+    		android:textStyle="bold"
+    		android:gravity="right"
+    		android:padding="5dip"/>
+    	<TextView 
+    		android:id="@+id/textview_location_value"
+    		android:layout_width="50dip"
+    		android:padding="5dip"/>
+  	</TableRow>
+ <!--  	<TableRow>
+  		<TextView 
+    		android:text="Lat"
+    		android:textStyle="bold"
+    		android:gravity="right"
+    		android:padding="5dip"/>
+    	<EditText
+    		android:id="@+id/edittext_post_lat"
+    		android:padding="5dip"/>
+  	</TableRow>
+  	<TableRow>
+  		<TextView 
+    		android:text="Lng"
+    		android:textStyle="bold"
+    		android:gravity="right"
+    		android:padding="5dip"/>
+    	<EditText
+    		android:id="@+id/edittext_post_lng"
+    		android:padding="5dip"/>
+  	</TableRow>-->
+  	<TableRow>
+  		<TextView 
+    		android:text="Area"
+    		android:textStyle="bold"
+    		android:gravity="right"
+    		android:padding="5dip"/>
+    	<Spinner android:id="@+id/spinner_post_area"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content" />
+  	</TableRow>
+   	<TableRow>
+  		<TextView 
+    		android:text="Address"
+    		android:textStyle="bold"
+    		android:gravity="right"
+    		android:layout_width="50dip"
+    		android:padding="5dip"/>
+    	<EditText
+    		android:id="@+id/edittext_post_address"
+    		android:padding="5dip"/>
+  	</TableRow>
+  	<TableRow>
+  		<TextView 
+    		android:text="Category"
+    		android:textStyle="bold"
+    		android:gravity="right"
+    		android:padding="5dip"/>
+    	<Spinner android:id="@+id/spinner_post_category"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content" />
+  	</TableRow>
+  	<TableRow>
+  		<TextView 
+    		android:text="Content"
+    		android:textStyle="bold"
+    		android:gravity="right"
+    		android:padding="5dip"/>
+    	<EditText
+    		android:id="@+id/edittext_post_content"
+    		android:layout_height="100dip"/>
+  	</TableRow>
+  	<TableRow>
+  		<TextView 
+    		android:text="Picture"
+    		android:textStyle="bold"
+    		android:gravity="right"
+    		android:padding="5dip"/>
+    	<Button
+    		android:id="@+id/button_post_take_picture"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:text="Take a picture"/>
+  	</TableRow>
+  </TableLayout>
+  <Button android:id="@+id/button_new_post_it"
+  	android:layout_width="fill_parent"
+  	android:layout_height="wrap_content"
+  	android:layout_marginLeft="80dip"
+  	android:layout_marginRight="80dip"
+  	android:text="Post it"/>
+</LinearLayout>
+</ScrollView>
