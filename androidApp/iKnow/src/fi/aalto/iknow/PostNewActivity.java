@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.zip.GZIPInputStream;
 
 import org.apache.http.HttpResponse;
@@ -35,6 +37,7 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,73 +57,103 @@ public class PostNewActivity extends Activity implements GPSInterface{
 	private GPSLocation gps = null;
 	private String formCheckResult = "";
 	private Post newPost = new Post();
-	private String picture_path = "";
+	private String photo_path = "";
+	
+	private ImageView photoView = null;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.post_new);
+        setContentView(R.layout.new_post);
         
-        picture_path = Environment.getExternalStorageDirectory() + "/images/new_post_photo.jpg";
+        ImageView locationButton = (ImageView) this.findViewById(R.id.image_button_location);
         
-        titleText = (EditText) this.findViewById(R.id.edittext_post_title);
-        
-//        latText = (EditText) this.findViewById(R.id.edittext_post_lat);
-//        lngText = (EditText) this.findViewById(R.id.edittext_post_lng);
-        contentText = (EditText) this.findViewById(R.id.edittext_post_content);
-        
-        locationText = (TextView) this.findViewById(R.id.textview_location_value);
-        addressText = (EditText) this.findViewById(R.id.edittext_post_address);
-        //start GPS service
-        gps = GPSLocation.getInstance();
-        gps.registerGPSHandler(PostNewActivity.this);
-        gps.registerLocationService(PostNewActivity.this);
-        locationText.setText("Getting GPS...");
-        
-        
-        
-        categorySpinner = (Spinner) this.findViewById(R.id.spinner_post_category);
-        ArrayList<String> categoryList = new ArrayList<String>();
-        categoryList.add(Post.Category.Hospital.name());
-        categoryList.add(Post.Category.Hotel.name());
-        categoryList.add(Post.Category.Library.name());
-        categoryList.add(Post.Category.Restaurant.name());
-        categoryList.add(Post.Category.Apartment.name());
-        categoryList.add(Post.Category.Common.name());
-        categorySpinner.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,categoryList));
-        
-        areaSpinner = (Spinner) this.findViewById(R.id.spinner_post_area);
-        ArrayList<String> areaList = new ArrayList<String>();
-        areaList.add("Helsinki");
-        areaList.add("Espoo");
-        areaSpinner.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,areaList));
-        
-        Button postItButton = (Button) this.findViewById(R.id.button_new_post_it);
-        OnClickListener postItListener = new OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				sendNewPost();
-			}
-        	
-        };
-        postItButton.setOnClickListener(postItListener);
-        
-        Button takePicButton = (Button) this.findViewById(R.id.button_post_take_picture);
+        ImageView cameraButton = (ImageView) this.findViewById(R.id.image_button_camera);
         OnClickListener takePicListener = new OnClickListener(){
         	@Override
 			public void onClick(View v) {
-        		File file = new File( picture_path );
-        	    Uri outputFileUri = Uri.fromFile( file );
+        		Date date = new Date();
+        		Timestamp now = new Timestamp(date.getTime()); 
+        		//create and set new picture path
+        		photo_path = Environment.getExternalStorageDirectory() + "/images/"+now+".jpg";
+        		File file = new File(photo_path);
+        	    Uri outputFileUri = Uri.fromFile(file);
 
         	    Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
-        	    intent.putExtra( MediaStore.EXTRA_OUTPUT, outputFileUri );
+        	    intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
         	    
-        	    startActivityForResult( intent, 0 );
+        	    startActivityForResult(intent,0);
 
 			}
         };
-        takePicButton.setOnClickListener(takePicListener);
+        cameraButton.setOnClickListener(takePicListener);
+        
+        ImageView tagsButton = (ImageView) this.findViewById(R.id.image_button_tags);
+        
+        Button sendButton = (Button) this.findViewById(R.id.button_new_post_send);
+        
+        photoView = (ImageView) this.findViewById(R.id.image_view_photo);
+        
+//        picture_path = Environment.getExternalStorageDirectory() + "/images/new_post_photo.jpg";
+//        
+//        titleText = (EditText) this.findViewById(R.id.edittext_post_title);
+//        
+////        latText = (EditText) this.findViewById(R.id.edittext_post_lat);
+////        lngText = (EditText) this.findViewById(R.id.edittext_post_lng);
+//        contentText = (EditText) this.findViewById(R.id.edittext_post_content);
+//        
+//        locationText = (TextView) this.findViewById(R.id.textview_location_value);
+//        addressText = (EditText) this.findViewById(R.id.edittext_post_address);
+//        //start GPS service
+//        gps = GPSLocation.getInstance();
+//        gps.registerGPSHandler(PostNewActivity.this);
+//        gps.registerLocationService(PostNewActivity.this);
+//        locationText.setText("Getting GPS...");
+//        
+//        
+//        
+//        categorySpinner = (Spinner) this.findViewById(R.id.spinner_post_category);
+//        ArrayList<String> categoryList = new ArrayList<String>();
+//        categoryList.add(Post.Category.Hospital.name());
+//        categoryList.add(Post.Category.Hotel.name());
+//        categoryList.add(Post.Category.Library.name());
+//        categoryList.add(Post.Category.Restaurant.name());
+//        categoryList.add(Post.Category.Apartment.name());
+//        categoryList.add(Post.Category.Common.name());
+//        categorySpinner.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,categoryList));
+//        
+//        areaSpinner = (Spinner) this.findViewById(R.id.spinner_post_area);
+//        ArrayList<String> areaList = new ArrayList<String>();
+//        areaList.add("Helsinki");
+//        areaList.add("Espoo");
+//        areaSpinner.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,areaList));
+//        
+//        Button postItButton = (Button) this.findViewById(R.id.button_new_post_it);
+//        OnClickListener postItListener = new OnClickListener(){
+//
+//			@Override
+//			public void onClick(View v) {
+//				sendNewPost();
+//			}
+//        	
+//        };
+//        postItButton.setOnClickListener(postItListener);
+//        
+//        Button takePicButton = (Button) this.findViewById(R.id.button_post_take_picture);
+//        OnClickListener takePicListener = new OnClickListener(){
+//        	@Override
+//			public void onClick(View v) {
+//        		File file = new File( picture_path );
+//        	    Uri outputFileUri = Uri.fromFile( file );
+//
+//        	    Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
+//        	    intent.putExtra( MediaStore.EXTRA_OUTPUT, outputFileUri );
+//        	    
+//        	    startActivityForResult( intent, 0 );
+//
+//			}
+//        };
+//        takePicButton.setOnClickListener(takePicListener);
         
 	}
 
@@ -224,10 +257,22 @@ public class PostNewActivity extends Activity implements GPSInterface{
 	    		Log.i( "iknow", "User cancelled" );
 	    		break;
 
-	    	case -1:
-	    		Log.i( "iknow", "User back" );
+	    	case -1://back from camera
+	    		showPhoto();
 	    		break;
 	    }
+	}
+	
+	/**
+	 * Display photo on ImageView
+	 */
+	private void showPhoto(){
+		BitmapFactory.Options options = new BitmapFactory.Options();
+	    options.inSampleSize = 4;
+
+	    Bitmap bitmap = BitmapFactory.decodeFile( photo_path, options );
+	    photoView.setImageBitmap(bitmap);
+
 	}
 	
 	/**
